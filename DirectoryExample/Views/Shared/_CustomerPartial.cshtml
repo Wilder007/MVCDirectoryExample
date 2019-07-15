@@ -1,0 +1,21 @@
+﻿@model DirectoryExample.Models.Customer
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Customer: @Html.DisplayFor(x => x.ContactName)</h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="form">
+            Company: @Html.DisplayFor(x => x.CompanyName) <br />
+            Address: @Html.DisplayFor(x => x.Address) <br />
+            City: @Html.DisplayFor(x => x.City) <br />
+            Country: @Html.DisplayFor(x => x.Country) <br />
+            Region: @Html.DisplayFor(x => x.Region) <br />
+            Phone: @Html.DisplayFor(x => x.Phone) <br />
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+    </div>
+</div>

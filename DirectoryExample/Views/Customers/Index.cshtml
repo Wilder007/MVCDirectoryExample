@@ -1,0 +1,131 @@
+﻿@model IEnumerable<DirectoryExample.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        var customerDetailPostBackURl = "/Customers/Details";
+        $(function() {
+            $(".OpenModal").click(function () {
+                debugger;
+                //alert("begin");
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr("data-id");
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: customerDetailPostBackURl,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        $("#custModalContent").html(data);
+                        $("#CustModal").modal(options);
+                        $("#CustModal").modal("show");
+                    },
+                    error: function () {
+                        alert("Dynamic ajax failed");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<h2>Customers</h2>
+<table class="table">
+    <tr>
+        <th>Details</th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.CompanyName).ToString(),
+                            "Index", new { field = "CompanyName", sortOrder = ViewBag.CompanyNameSort })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.ContactName).ToString(),
+                            "Index", new { field = "ContactName", sortOrder = ViewBag.ContactNameSort })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.ContactTitle).ToString(),
+                            "Index", new { field = "ContactTitle", sortOrder = ViewBag.TitleNameSort })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Address).ToString(),
+                            "Index", new { field = "Address", sortOrder = ViewBag.AddressSort })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.City).ToString(),
+                            "Index", new { field = "City", sortOrder = ViewBag.CitySort })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Region)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="javascript:void(0);" id="OpenModal" data-id="@item.CustomerID" class="OpenModal">View Details</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+
+        </tr>
+    }
+</table>
+
+<div class="modal fade" id="CustModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="custModalContent"></div>
+        </div>
+    </div>
+</div>
