@@ -1,103 +1,22 @@
 ﻿@model IEnumerable<DirectoryExample.Models.Employee>
-
+@using GridMvc.Html
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Employees</h2>
-
-<table class="table">
-    <tr>
-        <th>Details</th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TitleOfCourtesy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Region)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostalCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HomePhone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Extension)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        
-        
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.EmployeeID })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TitleOfCourtesy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BirthDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Region)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostalCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HomePhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Extension)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        
-    </tr>
-}
-
-</table>
+<head>
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+</head>
+<body>
+    @Html.Grid(Model).Columns(columns =>
+{
+        columns.Add().Encoded(false).Sanitized(false).Titled("Details")
+            .RenderValueAs(o => Html.ActionLink("View","Details",new { id = o.EmployeeID }, null));
+        columns.Add(x => x.LastName).Titled("Last Name");
+        columns.Add(x => x.FirstName).Titled("First Name");
+        columns.Add(x => x.Title).Titled("Title");
+        columns.Add(x => x.BirthDate).Titled("DOB").Filterable(true);
+        columns.Add(x => x.Country).Titled("Country").Filterable(true);
+    }).WithPaging(25).Sortable(true)
+</body>

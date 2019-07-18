@@ -93,3 +93,4 @@ C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\obj\Debug\Directo
 C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\obj\Debug\DirectoryExample.dll
 C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\obj\Debug\DirectoryExample.pdb
 C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\obj\Debug\DirectoryExample.csprojAssemblyReference.cache
+C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\bin\GridMvc.dll

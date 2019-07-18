@@ -7,12 +7,9 @@
 
 @section scripts
 {
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
     <script>
         var customerDetailPostBackURl = "/Customers/Details";
-        $(function() {
+        $(function () {
             $(".OpenModal").click(function () {
                 debugger;
                 //alert("begin");
@@ -40,12 +37,32 @@
 }
 
 <h2>Customers</h2>
+
+@using (@Html.BeginForm("Index", "Customers"))
+{
+    <div class="form">
+        <div class="form-group row">
+            <label for="staticEmail" class="col-1 col-form-label">Name:</label>
+            <div class="col-sm-3">
+                <input type="text" name="ContactName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-1 col-form-label">Company:</label>
+            <div class="col-sm-3">
+                <input type="text" name="CompanyName" class="form-control" />
+            </div>
+        </div>
+        <input type="submit" class="btn-info" value="Search" />
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>Details</th>
         <th>
             @Html.ActionLink(@Html.DisplayNameFor(model => model.CompanyName).ToString(),
-                            "Index", new { field = "CompanyName", sortOrder = ViewBag.CompanyNameSort })
+                     "Index", new { field = "CompanyName", sortOrder = ViewBag.CompanyNameSort })
         </th>
         <th>
             @Html.ActionLink(@Html.DisplayNameFor(model => model.ContactName).ToString(),

@@ -15,8 +15,14 @@ namespace DirectoryExample.Controllers
         private NorthwindEntities db = new NorthwindEntities();
 
         // GET: Customers
-        public ActionResult Index(string field, string sortOrder)
+        public ActionResult Index(string field, string sortOrder, Customer formSearch)
         {
+            //See if searchString is being used. If so then we will return a like clause for the view.
+            //if (formSearch != null)
+            //{
+            //    return View(db.Customers.Where(x => x.ContactName.Contains(formSearch.ContactName))); 
+            //}
+
             //Viewbags for the sorting either Ascending or Descending.
             ViewBag.CompanyNameSort = sortOrder == "compNameAsc" ? "compNameDesc" : "compNameAsc";
             ViewBag.ContactNameSort = sortOrder == "nameAsc" ? "nameDesc" : "nameAsc";
