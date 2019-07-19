@@ -33,7 +33,7 @@ namespace DirectoryExample.Controllers
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return PartialView("_EmployeePartial",employee);
         }
 
         // GET: Employees/Create

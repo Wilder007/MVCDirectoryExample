@@ -2,6 +2,41 @@
 @using GridMvc.Html
 @{
     ViewBag.Title = "Index";
+   
+}
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        var empDetailPostBackURl = "/Employees/Details";
+        $(function () {
+            $(".OpenModal").click(function () {
+                debugger;
+                //alert("begin");
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr("data-id");
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: empDetailPostBackURl,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        $("#empModalContent").html(data);
+                        $("#EmpModal").modal(options);
+                        $("#EmpModal").modal("show");
+                    },
+                    error: function () {
+                        alert("Dynamic ajax failed");
+                    }
+                });
+            });
+        });
+    </script>
 }
 
 <h2>Employees</h2>
@@ -11,8 +46,8 @@
 <body>
     @Html.Grid(Model).Columns(columns =>
 {
-        columns.Add().Encoded(false).Sanitized(false).Titled("Details")
-            .RenderValueAs(o => Html.ActionLink("View","Details",new { id = o.EmployeeID }, null));
+columns.Add().Encoded(false).Sanitized(false).Titled("Details")
+    .RenderValueAs(o => new HtmlString("<a href = '#', id='OpenModal' data-id='"+o.EmployeeID+"' class='OpenModal'>View Details</a>"));
         columns.Add(x => x.LastName).Titled("Last Name").Filterable(true);
         columns.Add(x => x.FirstName).Titled("First Name");
         columns.Add(x => x.Title).Titled("Title");
@@ -20,3 +55,11 @@
         columns.Add(x => x.Country).Titled("Country").Filterable(true);
     }).WithPaging(25).Sortable(true)
 </body>
+
+<div class="modal fade" id="EmpModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="empModalContent"></div>
+        </div>
+    </div>
+</div>
