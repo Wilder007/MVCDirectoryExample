@@ -47,13 +47,13 @@
     @Html.Grid(Model).Columns(columns =>
 {
 columns.Add().Encoded(false).Sanitized(false).Titled("Details")
-    .RenderValueAs(o => new HtmlString("<a href = '#', id='OpenModal' data-id='"+o.EmployeeID+"' class='OpenModal'>View Details</a>"));
-        columns.Add(x => x.LastName).Titled("Last Name").Filterable(true);
-        columns.Add(x => x.FirstName).Titled("First Name");
-        columns.Add(x => x.Title).Titled("Title");
-        columns.Add(x => x.BirthDate).Titled("DOB").Filterable(true);
-        columns.Add(x => x.Country).Titled("Country").Filterable(true);
-    }).WithPaging(25).Sortable(true)
+    .RenderValueAs(o => new HtmlString("<a href = '#', id='OpenModal' data-id='"+o.EmployeeID+"' class='OpenModal'>View</a>"));
+columns.Add(x => x.LastName).Titled("Last Name");
+columns.Add(x => x.FirstName).Titled("First Name");
+columns.Add(x => x.Title).Titled("Title");
+columns.Add(x => x.BirthDate).Titled("DOB").Format("{0:dd/MM/yyyy}");
+        columns.Add(x => x.Country).Titled("Country");
+    }).WithPaging(25).Sortable(true).Filterable(true).WithMultipleFilters()
 </body>
 
 <div class="modal fade" id="EmpModal">

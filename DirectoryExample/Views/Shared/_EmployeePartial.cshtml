@@ -2,24 +2,55 @@
 
 <div>
     <div class="modal-header">
-        <h3 class="modal-title">Customer: @Html.DisplayFor(x => x.FirstName) @Html.DisplayFor(x=>x.LastName)</h3>
+        <h3 class="modal-title">Employee: @Html.DisplayFor(x => x.FirstName) @Html.DisplayFor(x=>x.LastName)</h3>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
         <div class="form">
-            Title: @Html.DisplayFor(x => x.Title) <br />
-            DOB: @Html.DisplayFor(x => x.BirthDate) <br />
-            Hire Date: @Html.DisplayFor(x => x.HireDate) <br />
-            Address: @Html.DisplayFor(x => x.Address) <br />
-            Country: @Html.DisplayFor(x => x.Country) <br />
-            Region: @Html.DisplayFor(x => x.Region) <br />
-            City: @Html.DisplayFor(x=>x.City) <br />
-            PostalCode: @Html.DisplayFor(x=>x.PostalCode) <br />
-            Phone: @Html.DisplayFor(x=>x.HomePhone) <br />
-            Notes: @Html.DisplayFor(x=>x.Notes) <br />
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">Title:</label>
+                <label class="col-7">@Html.DisplayFor(x => x.Title)</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">DOB: </label>
+                <label class="col-7">@string.Format("{0:dd/MM/yyyy}",Convert.ToDateTime(@Html.DisplayFor(x=>x.BirthDate).ToString()))</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">Hire Date: </label> 
+                <label class="col-7">@string.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(@Html.DisplayFor(x => x.HireDate).ToString()))</label>            
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight:bold">Address: </label>
+                <label class="col-7">@Html.DisplayFor(x => x.Address)</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">Country: </label>
+                <label class="col-7">@Html.DisplayFor(x => x.Country)</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">Region: </label>
+                <label class="col-7">@Html.DisplayFor(x => x.Region)</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">City: </label>
+                <label class="col-7">@Html.DisplayFor(x => x.City)</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">Zip: </label>
+                <label class="col-7">@Html.DisplayFor(x => x.PostalCode)</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">Phone: </label>
+                <label class="col-7">@Html.DisplayFor(x => x.HomePhone)</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-3" style="font-weight: bold">Notes: </label>
+                <label class="col-7">@Html.DisplayFor(x => x.Notes)</label>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
         </div>
-
-    </div>
+ </div>
+    
