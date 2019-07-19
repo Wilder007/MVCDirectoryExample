@@ -13,7 +13,7 @@
 {
         columns.Add().Encoded(false).Sanitized(false).Titled("Details")
             .RenderValueAs(o => Html.ActionLink("View","Details",new { id = o.EmployeeID }, null));
-        columns.Add(x => x.LastName).Titled("Last Name");
+        columns.Add(x => x.LastName).Titled("Last Name").Filterable(true);
         columns.Add(x => x.FirstName).Titled("First Name");
         columns.Add(x => x.Title).Titled("Title");
         columns.Add(x => x.BirthDate).Titled("DOB").Filterable(true);
