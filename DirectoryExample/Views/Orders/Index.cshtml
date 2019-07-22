@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DirectoryExample.Models.Order>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        var orderEditPostBackURl = "/Orders/Edit";
+        $(function () {
+            $(".OpenModal").click(function () {
+                debugger;
+                //alert("begin");
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr("data-id");
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: orderEditPostBackURl,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        $("#orderEditModalContent").html(data);
+                        $("#orderEditModal").modal(options);
+                        $("#orderEditModal").modal("show");
+                    },
+                    error: function () {
+                        alert("Dynamic ajax failed");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<h2>Orders</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<html>
+<head>
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+</head>
+<body>
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add().Encoded(false).Sanitized(false).Titled("")
+    .RenderValueAs(o => new HtmlString("<a href = '#', id='OpenModal' data-id='" + o.OrderID + "' class='OpenModal'>Edit</a>"));
+    columns.Add(x => x.ShipName).Titled("Name");
+    columns.Add(x => x.OrderDate).Titled("Date Ordered").Format("{0:dd/MM/yyyy}");
+    columns.Add(x => x.RequiredDate).Titled("Date Req").Format("{0:dd/MM/yyyy}");
+    columns.Add(x => x.ShippedDate).Titled("Shipped Date").Format("{0:dd/MM/yyyy}");
+    columns.Add(x => x.ShipVia).Titled("ShippedVia");
+    columns.Add(x => x.Freight).Titled("Freight");
+    columns.Add(x => x.ShipAddress).Titled("Address");
+    columns.Add(x => x.ShipCountry).Titled("Country");
+
+}).Filterable(true).Sortable(true).WithMultipleFilters().WithPaging(25).EmptyText("No Data Found")
+</body>
+</html>
+
+<div class="modal fade" id="orderEditModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="orderEditModalContent"></div>
+        </div>
+    </div>
+</div>

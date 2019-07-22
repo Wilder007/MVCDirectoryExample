@@ -4,11 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f31362d321a54113be022aaedb6cfa48" Name="Diagram1" ZoomLevel="68">
+      <Diagram DiagramId="f31362d321a54113be022aaedb6cfa48" Name="Diagram1" ZoomLevel="65">
         <EntityTypeShape EntityType="NorthwindModel.Customer" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Product" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="NorthwindModel.FK_Employees_Employees" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NorthwindModel.CustomerDemographic" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="NorthwindModel.Order" Width="1.5" PointX="7.375" PointY="1.125" />
+        <EntityTypeShape EntityType="NorthwindModel.Shipper" Width="1.5" PointX="5.125" PointY="5.375" />
+        <EntityTypeShape EntityType="NorthwindModel.Current_Product_List" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="NorthwindModel.Customer_and_Suppliers_by_City" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="NorthwindModel.Invoice" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="NorthwindModel.Order_Details_Extended" Width="1.5" PointX="9.75" PointY="0.75" />
+        <AssociationConnector Association="NorthwindModel.FK_Orders_Customers" />
+        <AssociationConnector Association="NorthwindModel.FK_Orders_Employees" />
+        <AssociationConnector Association="NorthwindModel.FK_Orders_Shippers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

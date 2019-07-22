@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="NorthwindModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CustomerDemographics">
+    <Key>
+      <PropertyRef Name="CustomerTypeID" />
+    </Key>
+    <Property Name="CustomerTypeID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="CustomerDesc" Type="ntext" />
+  </EntityType>
   <EntityType Name="Customers">
     <Key>
       <PropertyRef Name="CustomerID" />
@@ -39,6 +46,25 @@
     <Property Name="ReportsTo" Type="int" />
     <Property Name="PhotoPath" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="nchar" MaxLength="5" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="RequiredDate" Type="datetime" />
+    <Property Name="ShippedDate" Type="datetime" />
+    <Property Name="ShipVia" Type="int" />
+    <Property Name="Freight" Type="money" />
+    <Property Name="ShipName" Type="nvarchar" MaxLength="40" />
+    <Property Name="ShipAddress" Type="nvarchar" MaxLength="60" />
+    <Property Name="ShipCity" Type="nvarchar" MaxLength="15" />
+    <Property Name="ShipRegion" Type="nvarchar" MaxLength="15" />
+    <Property Name="ShipPostalCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="ShipCountry" Type="nvarchar" MaxLength="15" />
+  </EntityType>
   <EntityType Name="Products">
     <Key>
       <PropertyRef Name="ProductID" />
@@ -54,6 +80,96 @@
     <Property Name="ReorderLevel" Type="smallint" />
     <Property Name="Discontinued" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="Shippers">
+    <Key>
+      <PropertyRef Name="ShipperID" />
+    </Key>
+    <Property Name="ShipperID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="24" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Northwind.dbo.Current Product List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Current Product List">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ProductName" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Northwind.dbo.Customer and Suppliers by City' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Customer and Suppliers by City">
+    <Key>
+      <PropertyRef Name="CompanyName" />
+      <PropertyRef Name="Relationship" />
+    </Key>
+    <Property Name="City" Type="nvarchar" MaxLength="15" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Relationship" Type="varchar" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Northwind.dbo.Invoices' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Invoices">
+    <Key>
+      <PropertyRef Name="CustomerName" />
+      <PropertyRef Name="Salesperson" />
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ShipperName" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="UnitPrice" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Discount" />
+    </Key>
+    <Property Name="ShipName" Type="nvarchar" MaxLength="40" />
+    <Property Name="ShipAddress" Type="nvarchar" MaxLength="60" />
+    <Property Name="ShipCity" Type="nvarchar" MaxLength="15" />
+    <Property Name="ShipRegion" Type="nvarchar" MaxLength="15" />
+    <Property Name="ShipPostalCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="ShipCountry" Type="nvarchar" MaxLength="15" />
+    <Property Name="CustomerID" Type="nchar" MaxLength="5" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="60" />
+    <Property Name="City" Type="nvarchar" MaxLength="15" />
+    <Property Name="Region" Type="nvarchar" MaxLength="15" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="Country" Type="nvarchar" MaxLength="15" />
+    <Property Name="Salesperson" Type="nvarchar" MaxLength="31" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="RequiredDate" Type="datetime" />
+    <Property Name="ShippedDate" Type="datetime" />
+    <Property Name="ShipperName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="UnitPrice" Type="money" Nullable="false" />
+    <Property Name="Quantity" Type="smallint" Nullable="false" />
+    <Property Name="Discount" Type="real" Nullable="false" />
+    <Property Name="ExtendedPrice" Type="money" />
+    <Property Name="Freight" Type="money" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Northwind.dbo.Order Details Extended' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Order Details Extended">
+    <Key>
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="UnitPrice" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Discount" />
+    </Key>
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="UnitPrice" Type="money" Nullable="false" />
+    <Property Name="Quantity" Type="smallint" Nullable="false" />
+    <Property Name="Discount" Type="real" Nullable="false" />
+    <Property Name="ExtendedPrice" Type="money" />
+  </EntityType>
   <Association Name="FK_Employees_Employees">
     <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
     <End Role="Employees1" Type="Self.Employees" Multiplicity="*" />
@@ -66,13 +182,119 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Orders_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Employees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Shippers">
+    <End Role="Shippers" Type="Self.Shippers" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shippers">
+        <PropertyRef Name="ShipperID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ShipVia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="NorthwindModelStoreContainer">
+    <EntitySet Name="CustomerDemographics" EntityType="Self.CustomerDemographics" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shippers" EntityType="Self.Shippers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Current Product List" EntityType="Self.Current Product List" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Current Product List].[ProductID] AS [ProductID], 
+    [Current Product List].[ProductName] AS [ProductName]
+    FROM [dbo].[Current Product List] AS [Current Product List]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Customer and Suppliers by City" EntityType="Self.Customer and Suppliers by City" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Customer and Suppliers by City].[City] AS [City], 
+    [Customer and Suppliers by City].[CompanyName] AS [CompanyName], 
+    [Customer and Suppliers by City].[ContactName] AS [ContactName], 
+    [Customer and Suppliers by City].[Relationship] AS [Relationship]
+    FROM [dbo].[Customer and Suppliers by City] AS [Customer and Suppliers by City]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Invoices].[ShipName] AS [ShipName], 
+    [Invoices].[ShipAddress] AS [ShipAddress], 
+    [Invoices].[ShipCity] AS [ShipCity], 
+    [Invoices].[ShipRegion] AS [ShipRegion], 
+    [Invoices].[ShipPostalCode] AS [ShipPostalCode], 
+    [Invoices].[ShipCountry] AS [ShipCountry], 
+    [Invoices].[CustomerID] AS [CustomerID], 
+    [Invoices].[CustomerName] AS [CustomerName], 
+    [Invoices].[Address] AS [Address], 
+    [Invoices].[City] AS [City], 
+    [Invoices].[Region] AS [Region], 
+    [Invoices].[PostalCode] AS [PostalCode], 
+    [Invoices].[Country] AS [Country], 
+    [Invoices].[Salesperson] AS [Salesperson], 
+    [Invoices].[OrderID] AS [OrderID], 
+    [Invoices].[OrderDate] AS [OrderDate], 
+    [Invoices].[RequiredDate] AS [RequiredDate], 
+    [Invoices].[ShippedDate] AS [ShippedDate], 
+    [Invoices].[ShipperName] AS [ShipperName], 
+    [Invoices].[ProductID] AS [ProductID], 
+    [Invoices].[ProductName] AS [ProductName], 
+    [Invoices].[UnitPrice] AS [UnitPrice], 
+    [Invoices].[Quantity] AS [Quantity], 
+    [Invoices].[Discount] AS [Discount], 
+    [Invoices].[ExtendedPrice] AS [ExtendedPrice], 
+    [Invoices].[Freight] AS [Freight]
+    FROM [dbo].[Invoices] AS [Invoices]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Order Details Extended" EntityType="Self.Order Details Extended" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Order Details Extended].[OrderID] AS [OrderID], 
+    [Order Details Extended].[ProductID] AS [ProductID], 
+    [Order Details Extended].[ProductName] AS [ProductName], 
+    [Order Details Extended].[UnitPrice] AS [UnitPrice], 
+    [Order Details Extended].[Quantity] AS [Quantity], 
+    [Order Details Extended].[Discount] AS [Discount], 
+    [Order Details Extended].[ExtendedPrice] AS [ExtendedPrice]
+    FROM [dbo].[Order Details Extended] AS [Order Details Extended]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
       <End Role="Employees" EntitySet="Employees" />
       <End Role="Employees1" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Shippers" Association="Self.FK_Orders_Shippers">
+      <End Role="Shippers" EntitySet="Shippers" />
+      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

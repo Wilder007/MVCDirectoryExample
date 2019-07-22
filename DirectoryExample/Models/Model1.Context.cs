@@ -28,5 +28,12 @@ namespace DirectoryExample.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<CustomerDemographic> CustomerDemographics { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<Current_Product_List> Current_Product_Lists { get; set; }
+        public virtual DbSet<Customer_and_Suppliers_by_City> Customer_and_Suppliers_by_Cities { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Order_Details_Extended> Order_Details_Extendeds { get; set; }
     }
 }
