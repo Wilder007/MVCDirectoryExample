@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System.Text;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DirectoryExample.Models;
+using System.Data.SqlClient;
 
 namespace DirectoryExample.Controllers
 {
@@ -127,6 +132,68 @@ namespace DirectoryExample.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ExportEmployees()
+        {
+            byte[] fileData = null;
+            //string filePath = Server.MapPath("~/App_Data/Employees.xlsx");
+            try
+            {
+                using (ExcelPackage excelPackage = new ExcelPackage())
+                {
+                    ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Employees");
+                    
+                    worksheet.Cells["A1"].LoadFromCollection(db.Employees.ToList(), true);
+                    fileData = excelPackage.GetAsByteArray();
+
+                    //Clear buffer stream
+                    Response.ClearHeaders();
+                    Response.Clear();
+                    Response.Buffer = true;
+
+                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    Response.AddHeader("content-length", fileData.Length.ToString());
+                    Response.AddHeader("content-dipopsition", "attachment; filename=\"Employees.xlsx\"");
+                    Response.OutputStream.Write(fileData, 0, fileData.Length);
+                    Response.Flush();
+                    Response.Close();
+                    //HttpContext.ApplicationInstance.CompleteRequest();
+                    
+                    //FileInfo fileinfo = new FileInfo(filePath);
+                    //excelPackage.SaveAs(fileinfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error exporting Employees. Error: " + ex.ToString());
+            }
+            
+            return RedirectToAction("Index");
+        }
+
+        //This function grabs the data from the model and then exports them to excel.
+        //[HttpPost, ActionName("ExportEmp")]
+        public void ExportEmp()
+        {
+            try
+            {
+                var emps = db.Employees.ToList();
+                var datapath = Server.MapPath("~/App_Data/Employees.txt");
+                FileStream fs = new FileStream(datapath, FileMode.OpenOrCreate);
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    foreach (Employee emp in emps)
+                    {
+                        sw.WriteLine(emp.LastName + " " + emp.FirstName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in EmpController ExportEmp. Error:" + ex.ToString());
+            }
+            RedirectToAction("Index");
         }
     }
 }

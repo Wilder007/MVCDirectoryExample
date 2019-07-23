@@ -6,6 +6,7 @@
 
 @section scripts
 {
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -43,9 +44,6 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <html>
-<head>
-    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
-</head>
 <body>
     @Html.Grid(Model).Columns(columns =>
 {
@@ -60,7 +58,8 @@
     columns.Add(x => x.ShipAddress).Titled("Address");
     columns.Add(x => x.ShipCountry).Titled("Country");
 
-}).Filterable(true).Sortable(true).WithMultipleFilters().WithPaging(25).EmptyText("No Data Found")
+}).WithPaging(25).Filterable(true).Sortable(true).WithMultipleFilters().EmptyText("No Data Found")
+
 </body>
 </html>
 
