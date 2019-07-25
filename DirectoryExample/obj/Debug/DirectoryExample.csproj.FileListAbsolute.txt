@@ -96,3 +96,7 @@ C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\bin\GridMvc.dll
 C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\bin\EPPlus.dll
 C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\bin\EPPlus.xml
 C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\obj\Debug\DirectoryExample.csprojAssemblyReference.cache
+C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\bin\PagedList.dll
+C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\bin\PagedList.Mvc.dll
+C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\bin\PagedList.xml
+C:\C# Projects\Grid Examples\DirectoryExample\DirectoryExample\bin\PagedList.Mvc.xml

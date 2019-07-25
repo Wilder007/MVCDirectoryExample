@@ -24,11 +24,14 @@ namespace DirectoryExample
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/flatly.bootstrap.css",
+                      "~/Content/Gridmvc.css",
+                      "~/Content/PagedList.css",
                       "~/Content/site.css"));
 
             // Use if the nuget package MVC.Grid. This makes life easier and better.
             bundles.Add(new ScriptBundle("~/bundles/mvcgrid").Include(
                 "~/Content/Gridmvc.css",
+                "~/Content/PagedList.css",
                 "~/Scripts/gridmvc.js"));
             }
     }

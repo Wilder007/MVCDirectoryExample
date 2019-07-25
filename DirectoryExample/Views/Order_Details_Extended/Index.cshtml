@@ -1,0 +1,17 @@
+﻿@model IEnumerable<DirectoryExample.Models.Order_Details_Extended>
+@using GridMvc.Html;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Order Details</h2>
+<body>
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(x => x.ProductName).Titled("Product Name");
+    columns.Add(x => x.Quantity).Titled("Quantity");
+    columns.Add(x => x.UnitPrice).Titled("Unit Price");
+    columns.Add(x => x.ExtendedPrice).Titled("Extended Price");
+}).WithPaging(25).Filterable().Sortable().EmptyText("No Data Found")
+</body>

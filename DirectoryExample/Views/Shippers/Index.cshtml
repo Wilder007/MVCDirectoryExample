@@ -1,0 +1,14 @@
+﻿@model IEnumerable<DirectoryExample.Models.Shipper>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Shippers</h2>
+<body>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(x => x.CompanyName).Titled("Name");
+    columns.Add(x => x.Phone).Titled("Phone");
+}).WithPaging(25).Filterable().Sortable().EmptyText("No Data Found")
+</body>
